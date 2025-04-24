@@ -32,8 +32,8 @@ bool MS5837::init(TwoWire &wirePort) {
 	_i2cPort = &wirePort; //Grab which port the user wants us to use
 
 	// Reset the MS5837, per datasheet
-	_i2cPort->beginTransmission(MS5837_ADDR);
 	_i2cPort->setClock(10000);
+	_i2cPort->beginTransmission(MS5837_ADDR);
 	_i2cPort->write(MS5837_RESET);
 	_i2cPort->endTransmission();
 
