@@ -43,13 +43,15 @@ bool MS5837::init(TwoWire &wirePort) {
 	_i2cPort->endTransmission();
 
 	// Wait for reset to complete
-	delay(10);
+	delay(100);
 
 	// Read calibration values and CRC
 	for ( uint8_t i = 0 ; i < 7 ; i++ ) {
 		_i2cPort->beginTransmission(MS5837_ADDR);
 		_i2cPort->write(MS5837_PROM_READ+i*2);
 		_i2cPort->endTransmission();
+
+		delay(50);
 
 		_i2cPort->requestFrom(MS5837_ADDR,2);
 		C[i] = (_i2cPort->read() << 8) | _i2cPort->read();
